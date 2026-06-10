@@ -7,12 +7,12 @@
 from abc import ABC, abstractmethod
 from datetime import date
 
-from pydantic import BaseModel, HttpUrl
+from pydantic import BaseModel
 
 
 class CollectedArticle(BaseModel):
     title: str
-    url: HttpUrl
+    url: str  # HttpUrl は Pydantic v2 では str 非互換(Url オブジェクト)のため str で受け取る
     source: str | None = None
     published_at: date | None = None
     summary: str  # 日本語2〜3文
