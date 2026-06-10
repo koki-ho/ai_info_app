@@ -15,7 +15,11 @@ class User(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str | None] = mapped_column(String(255))
+<<<<<<< HEAD
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+=======
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+>>>>>>> origin/main
 
 
 class Topic(Base):
@@ -26,7 +30,11 @@ class Topic(Base):
     name: Mapped[str] = mapped_column(String(255))
     note: Mapped[str | None] = mapped_column(Text)
     enabled: Mapped[bool] = mapped_column(default=True)
+<<<<<<< HEAD
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+=======
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+>>>>>>> origin/main
 
     articles: Mapped[list["Article"]] = relationship(
         back_populates="topic", cascade="all, delete-orphan"
