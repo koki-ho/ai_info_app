@@ -15,7 +15,11 @@ class User(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str | None] = mapped_column(String(255))
+<<<<<<< HEAD
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+=======
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+>>>>>>> origin/main
 
 
 class Topic(Base):
@@ -26,7 +30,11 @@ class Topic(Base):
     name: Mapped[str] = mapped_column(String(255))
     note: Mapped[str | None] = mapped_column(Text)
     enabled: Mapped[bool] = mapped_column(default=True)
+<<<<<<< HEAD
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+=======
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+>>>>>>> origin/main
 
     articles: Mapped[list["Article"]] = relationship(
         back_populates="topic", cascade="all, delete-orphan"
@@ -42,7 +50,7 @@ class CareerProfile(Base):
     resume_text: Mapped[str] = mapped_column(Text)
     career_direction: Mapped[str] = mapped_column(Text)
     enabled: Mapped[bool] = mapped_column(default=True)
-    updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, onupdate=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
 
 
 class Article(Base):
@@ -60,7 +68,7 @@ class Article(Base):
     summary: Mapped[str] = mapped_column(Text)
     relevance: Mapped[str | None] = mapped_column(Text)  # キャリア収集分のみ
     is_read: Mapped[bool] = mapped_column(default=False)
-    collected_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    collected_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
     topic: Mapped[Topic | None] = relationship(back_populates="articles")
 
@@ -73,5 +81,5 @@ class CollectionRun(Base):
     scope: Mapped[str] = mapped_column(String(32))  # "all" | "topic:{id}" | "career"
     status: Mapped[str] = mapped_column(String(16))  # "running" | "success" | "partial" | "failed"
     detail: Mapped[str | None] = mapped_column(Text)  # 対象別の件数・エラー(JSON)
-    started_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
-    finished_at: Mapped[datetime | None] = mapped_column(DateTime)
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
